@@ -10,8 +10,7 @@ COPY apps/backend/package*.json ./
 RUN npm ci
 
 COPY apps/backend ./
-RUN npm run build \
-  && npm prune --omit=dev
+RUN npm run build
 
 FROM node:20-bookworm-slim AS runtime
 
@@ -25,4 +24,4 @@ RUN apt-get update \
 COPY --from=build /app/apps/backend ./
 
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]
