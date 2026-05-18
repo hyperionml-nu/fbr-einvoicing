@@ -22,6 +22,17 @@ export const app = express();
 app.use(cors());
 app.use(express.json());
 
+const deploymentApiPrefix = process.env.API_BASE_PATH || "/api/fbr-einvoicing-backend";
+
+app.use((req, _res, next) => {
+  if (deploymentApiPrefix !== "/" && req.url.startsWith(`${deploymentApiPrefix}/`)) {
+    req.url = req.url.slice(deploymentApiPrefix.length);
+  } else if (req.url === deploymentApiPrefix) {
+    req.url = "/";
+  }
+  next();
+});
+
 app.get("/health", (_req, res) => {
   res.json({ ok: true, service: "fbr-einvoicing-api" });
 });
