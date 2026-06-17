@@ -38,7 +38,7 @@ const Signup = () => {
     setError("");
 
     try {
-      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "";
       await axios.post(`${API_BASE_URL}/api/auth/register`, {
         fullName: form.fullName.trim(),
         email: form.email.trim(),
