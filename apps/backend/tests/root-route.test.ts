@@ -31,6 +31,7 @@ describe("root route", () => {
     const body = await response.json() as Record<string, any>;
     assert.equal(body.ok, true);
     assert.equal(body.service, "fbr-einvoicing-api");
+    assert.equal(body.environment, process.env.NODE_ENV || "development");
     assert.equal(body.docs, "/api-docs");
     assert.equal(body.health, "/health");
   });

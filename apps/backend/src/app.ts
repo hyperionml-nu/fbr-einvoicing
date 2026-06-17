@@ -37,6 +37,7 @@ app.get("/", (_req, res) => {
   res.json({
     ok: true,
     service: "fbr-einvoicing-api",
+    environment: process.env.NODE_ENV || "development",
     health: "/health",
     docs: "/api-docs",
     openapi: "/api-docs.json",
